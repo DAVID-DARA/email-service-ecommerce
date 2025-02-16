@@ -2,25 +2,22 @@ const nodemailer = require('nodemailer');
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  host: 'live.smtp.mailtrap.io',
-  port: 587,
-  secure: false,
+  host: 'sandbox.smtp.mailtrap.io',
+  port: 2525,
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.EMAIL_PASSWORD
   }
 });
 
-const mailOptions = {
-  from: 'yourusername@email.com',
-  to: 'yourfriend@email.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
-
-// Send the email
-const sendEmail= async () => {
+const sendEmail= async ({to, subject, body}) => {
     try {
+      const mailOptions = {
+        from: 'no-reply@lorem.com',
+        to, 
+        subject,
+        html: body
+      };
         const info  = await transporter.sendMail(mailOptions);
         console.log("Email sent: ", info.messageId)
     } catch (error) {

@@ -17,7 +17,7 @@ const consumeMessages = async () => {
     channel.consume(QUEUE_NAME, async (msg) => {
         if (msg != null) {
             const emailData = JSON.parse(msg.content.toString());
-            console.log("Received message: ", emailData);
+            // console.log("Received message: ", emailData);
 
             await sendEmail(emailData);
             channel.ack(msg);
