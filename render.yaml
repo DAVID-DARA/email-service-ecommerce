@@ -1,0 +1,30 @@
+services:
+  - name: rabbitmq
+    type: pserv
+    runtime: docker
+    plan: starter
+    envVars:
+      - key: RABBITMQ_DEFAULT_USER
+        value: guest
+      - key: RABBITMQ_DEFAULT_PASS
+        value: guest
+    dockerfilePath: ./Dockerfile.rabbitmq
+    disk:
+      name: rabbitmq_data
+      mountPath: /var/lib/rabbitmq
+      sizeGB: 1
+
+  - name: email-service
+    type: web
+    runtime: node
+    plan: free
+    repo: https://github.com/DAVID-DARA/email-service-ecommerce.git
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: RABBITMQ_URL
+        value: amqp://guest:guest@rabbitmq:5672
