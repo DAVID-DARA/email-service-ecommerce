@@ -1,5 +1,5 @@
 const express = require("express");
-const { conenctRabbitMQ, connectRabbitMQ} = require("./config/rabbitmq");
+const { connectRabbitMQ} = require("./config/rabbitmq");
 const consumeMessages = require("./consumers/rabbitConsumer");
 
 const app = express();
