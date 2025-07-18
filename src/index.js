@@ -8,9 +8,16 @@ const startServer = async () => {
     await connectRabbitMQ();
     await consumeMessages();
 
+    app.get("/", (req, res) => {
+        res.send("Email service is running ✅");
+    });
+
     app.listen(PORT, () => {
-        console.log(`Email service runnig on port ${PORT}`);
+        console.log(`Email service running on port ${PORT}`);
     });
 };
 
 startServer();
+
+// RUN COMMAND DOCKER
+// docker run -d --hostname rabbitmq-host --name rabbitmq2 -p 5672:5672 -p 15672:15672 rabbitmq:latest

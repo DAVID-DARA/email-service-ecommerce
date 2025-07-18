@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Management UI
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@localhost:15672
+      RABBITMQ_HOST: localhost
+      RABBITMQ_USER: guest
+      RABBITMQ_PASS: guest
+      PORT: 4000
+      QUEUE_NAME: email_queue
+      EMAIL_USER: 1f98e254c6f4b7
+      EMAIL_PASSWORD: 0dc74490d977b0
+
+  email-service:
+    build: .
+    container_name: email-service
+    ports:
+      - "4000:4000"
+    depends_on:
+      - rabbitmq
+    env_file:
+      - .env
