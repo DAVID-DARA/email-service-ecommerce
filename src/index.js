@@ -9,7 +9,7 @@ const startServer = async () => {
     await consumeMessages();
 
     app.get("/", (req, res) => {
-        res.send("Email service is running ✅");
+        res.send("Email service is running ✅ Now");
     });
 
     app.listen(PORT, () => {
