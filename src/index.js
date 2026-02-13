@@ -1,16 +1,23 @@
 const express = require("express");
-const { conenctRabbitMQ } = require("./config/rabbitmq");
+const { connectRabbitMQ} = require("./config/rabbitmq");
 const consumeMessages = require("./consumers/rabbitConsumer");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const startServer = async () => {
-    await conenctRabbitMQ();
-    consumeMessages();
+    await connectRabbitMQ();
+    await consumeMessages();
+
+    app.get("/", (req, res) => {
+        res.send("Email service is running ✅ Now");
+    });
 
     app.listen(PORT, () => {
-        console.log(`Email service runnig on port ${PORT}`);
+        console.log(`Email service running on port ${PORT}`);
     });
 };
 
 startServer();
+
+// RUN COMMAND DOCKER
+// docker run -d --hostname rabbitmq-host --name rabbitmq2 -p 5672:5672 -p 15672:15672 rabbitmq:latest
