@@ -27,4 +27,4 @@ ENV EMAIL_PASSWORD=c95aca78f32c7e
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "server.js"]
+CMD ["node", "index.js"]
