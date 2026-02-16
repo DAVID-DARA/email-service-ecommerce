@@ -24,7 +24,7 @@ ENV EMAIL_USER=9b07daf8432490
 ENV EMAIL_PASSWORD=c95aca78f32c7e
 
 # Expose the port your Node.js app runs on (e.g., 3000)
-EXPOSE 3000
+EXPOSE 2040
 
 # Command to run the application
 CMD ["node", "index.js"]

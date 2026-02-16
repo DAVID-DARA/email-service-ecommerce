@@ -6,11 +6,14 @@
   "author": "DAVID-DARA",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "cross-env node src/index.js",
+    "dev": "cross-env nodemon src/index.js",
+    "start:dev": "cross-env NODE_ENV=dev node src/index.js",
+    "start:prod": "cross-env NODE_ENV=prod node src/index.js"
   },
   "dependencies": {
     "amqplib": "^0.10.5",
+    "cross-env": "^10.1.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mailtrap": "^3.4.0",

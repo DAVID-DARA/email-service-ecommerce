@@ -11,7 +11,7 @@ const connectRabbitMQ = async () => {
         const connection = await amqp.connect({
             protocol: 'amqp',
             hostname: process.env.RABBITMQ_HOST, // e.g. 'localhost' or 'rabbitmq'
-            port: 5672,
+            port: process.env.RABBITMQ_PORT || 5672,
             username: process.env.RABBITMQ_USER,
             password: process.env.RABBITMQ_PASS,
             frameMax: 8192,
